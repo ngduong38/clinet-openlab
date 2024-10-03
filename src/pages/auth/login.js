@@ -1,4 +1,5 @@
 import {useForm} from "react-hook-form";
+import { Link } from "react-router-dom";
 
 export default function Login() {
     const {
@@ -62,8 +63,12 @@ export default function Login() {
                         <a href="#">Forgot Password</a>
                     </div>
                 </div>
-                <div className={'text-center'}>
-                    <button type="submit" className="btn btn-primary">Đăng nhập</button>
+                <div className={'text-center mb-3'}>
+                    <button type="submit" className="btn btn-primary w-100" formAction="/home">LOGIN</button>
+                </div>
+                <div className={'text-center mb-3'}>
+                    <a>Not register?</a>
+                    <a className="text-primary" href="/register">Create an account</a>
                 </div>
             </form>
         </>
