@@ -1,11 +1,30 @@
 import { MdOutlineShoppingCart } from "react-icons/md";
 import { FaRegBell } from "react-icons/fa6";
-import { FaRegCircleUser } from "react-icons/fa6";
+import { FaRegCircleUser, FaRegIdCard } from "react-icons/fa6";
 import React, { useState } from 'react'
+import { MdLogout } from "react-icons/md";
+import { TbPackage } from "react-icons/tb";
 
 
 
 export default function Header() {
+    const mainHeaderDropdown = (e) => {
+        e.preventDefault();
+        const liElement = e.target.closest('li');
+
+        if (liElement.classList.contains('show')) {
+            liElement.classList.remove('show');
+            liElement.querySelector('.dropdown-menu').classList.remove('show');
+
+            return;
+        }
+        document.querySelectorAll('li.dropdown').forEach( item => {
+            item.classList.remove('show');
+            item.querySelector('.dropdown-menu').classList.remove('show');
+        })
+        liElement.classList.add('show');
+        liElement.querySelector('.dropdown-menu').classList.add('show');
+    }
 
     return (
         <>
@@ -53,18 +72,52 @@ export default function Header() {
                             </ul>
                         </div>
                         <div class="content-right flex">
-                            <div class="flex gap-7 items-center">
+                            <div class="flex items-center">
                                 <div class="relative cursor-pointer">
                                     <MdOutlineShoppingCart />
+                                </div>
+                                <div class="relative cursor-pointer ml-2">
                                     <FaRegBell />
                                 </div>
-                            </div>
-                            <button data-state="closed" class="xs:w-full sm:w-full ">
-                                <div class="flex justify-center items-center gap-2 cursor-pointer ">
-                                    <FaRegCircleUser />
-                                    
-                                </div>
-                            </button>
+                                
+                            </div>  
+                            <ul className="mt-3">
+                                <li className="nav-item mx-3 dropdown">
+                                    <a 
+                                        className="nav-link"
+                                        href="#"
+                                        data-toggle={"dropdown"}
+                                        aria-expanded={"false"}
+                                        onClick={(e) => mainHeaderDropdown(e)}
+                                    >
+                                        <FaRegCircleUser />
+                                    </a>
+                                    <div
+                                        className="dropdown-menu dropdown-menu-lg dropdown-menu-left"
+                                        style={
+                                            {
+                                                left: 'inherit',
+                                                right: '0px'
+                                            }
+                                        }
+                                    >
+                                        <a className="dropdown-item d-flex  fs-6 align-items-center ">
+                                            <p className="me-2 icon-header"><FaRegIdCard /></p> 
+                                            Thông tin tài khoản
+                                        </a>
+                                        <a className="dropdown-item d-flex  fs-6 align-items-center">
+                                            <p className="me-2 icon-header"><TbPackage /> </p>
+                                            Thông tin Thiết bị/Kit
+                                        </a>
+                                        <a className="dropdown-item d-flex  fs-6 align-items-center"
+                                            href="/login"
+                                        >
+                                            <p className="me-2 icon-header"><MdLogout /></p>
+                                            Đăng xuất 
+                                        </a>
+                                    </div>
+                                </li>
+                            </ul>
                         </div>
                     </div>
                 </div>
